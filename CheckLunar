@@ -1,0 +1,136 @@
+//02번
+
+#include <stdio.h>
+#include <time.h>
+int yyear();
+int ymonth();
+int yday();
+int liveDay(int year, int month, int day, int tyear, int tmonth, int tday);
+int checkLunar(int year);  //윤년이면 1, 아니면 0반환 
+
+void main(){
+   
+   
+   
+   time_t time_ms;
+   struct tm *t;
+   int year, month, day;
+   
+   time_ms = time(NULL);
+   t=localtime(&time_ms);
+   year = t->tm_year%100+2000;
+   month = t->tm_mon+1;
+   day = t->tm_mday;
+   
+   printf("%d\t%d\t%d\n", year, month, day); 
+   
+   
+   
+   
+   int   byear = yyear();
+   int bmonth = ymonth();
+   int bday = yday();
+   printf("%d\t%d\t%d\n", byear, bmonth, bday);
+   
+   
+   int happy = liveDay(byear, bmonth, bday, year, month, day);
+   
+} 
+
+
+int yyear(){
+   
+   int yea;
+   
+   printf("태어난 년도를 입력하세요 : ");
+   scanf("%d", &yea);
+   return (yea);
+}
+
+int ymonth(){
+   int mont;
+   printf("태어난 달을 입력하세요 : ");
+   scanf("%d", &mont);
+   return (mont);
+}
+
+int yday(){
+   int da;
+   printf("태어난 일을 입력하세요 : ");
+   scanf("%d", &da);
+   return (da);
+}
+
+
+int liveDay(int year, int month, int day, int tyear, int tmonth, int tday){
+   int totalDay = 0;
+   int i=0;
+   int mon[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+   int mo=0;
+   
+   //태어난 해와 현재년도를 제외한 년도별 살아온 일수 합 계산 
+   for(i = year+1; i<tyear-1; i++){
+      
+      if(checkLunar(i)==0) totalDay +=365;
+      else totalDay +=366;
+   }
+   
+   // 태어난 해의 살아온 일수 계산
+      // 태어난 해가 윤년인가?
+      // 만약에 윤년이라면, 
+      // 태어난 달 다음달 부터 12월까지의 살아온 일수 계산
+         //만약 태어난 달이 1일월이라면, 2월 일수 계산 시 29일로 반영 
+         //아니라면, 기존 달의 일자를 합함
+      // 태어난 달의 살아온 일수 계산을 위하여, 태어난 달의 전체 일수 - 태어난 일 +1; 
+   
+   
+   // 현재 년도의 살아온 일수 계산 
+   
+   
+   
+   if(checkLunar(year)==0){   // 윤년o 
+      mon[1] = 29;
+      for(i = month; i<12; i++)
+      mo += mon[i];
+   }
+   
+   else{
+      for(i = month; i<12; i++)
+      mo += mon[i];
+   }
+   
+   for(i=0;i<month-1;i++){
+   if(month == mon[i])
+   mo +=  mon[i] - day +1;
+   }  
+   
+   mo += tday;
+   totalDay += mo;
+   
+   printf("%d\n\n", mo);
+   printf("%d", totalDay);
+
+   return (totalDay);
+}
+
+int checkLunar(int year){		// 윤년 0 / x-1 
+   
+      if(year%4 == 0){   // 윤년일 때 +366
+         if(year%100 == 0){      // 윤년x 
+            if(year%400 == 0){   // o
+                  return 0;
+            }
+            else{
+               return 1;
+            }
+         }
+         else{ return 1;
+         }
+      }
+      
+      else{
+         return 0;
+      }               
+}
+
+
