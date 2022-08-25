@@ -1,0 +1,118 @@
+#include <stdio.h>
+
+//  01번 
+int purchase();
+int outstanding();
+char change(int purc, int outs);
+
+int main(void){
+	
+		printf("\n\n\t<<<< Rains Casher Program >>>>\t\n\n");
+	
+	int pur = purchase();
+	int out = outstanding(); 
+	int needMoney;	// 필요금액 
+	int plusMoney=0;	//추가지불금액 
+	int plus=0;
+	
+	
+	while(out<pur){
+		int needMoney = pur - out;	// 필요금액 
+		printf("\t%d원이 부족합니다 \n", needMoney);
+		printf("\n");
+		printf("\t추가 지급금액 입력 : ");
+		scanf("%d", &plusMoney);
+		printf("\n");
+		out += plusMoney;
+		
+		}
+		
+	//out += plusMoney; // 지급금액 + 추가지급금액 
+	printf("\t총 지급금액 : %d원\n", out);
+	
+	char aa = change(pur, out);
+	return 0;
+}
+
+int purchase (){	// 물품구매금액 함수 
+	int pamount;
+
+	printf("\t물품구매금액 입력 : ");
+	scanf("%d", &pamount);
+	printf("\n");
+
+	return (pamount);
+}
+
+int outstanding(){	// 지급금액 함수 
+	int oamount;
+
+	printf("\t지급금액 입력 : ");
+	scanf("%d", &oamount);
+	printf("\n");
+
+	return (oamount);
+}
+
+char change(int purc, int outs){
+	int cha = outs - purc;	// 지불금액 - 상품금액 
+	int remain=0;	// 나머지 돈 
+	printf("\n\n\t********************** 거스름돈 **********************\n\n");
+	
+	if(cha%50000 >= 0){		// 5만원권	 
+		int oman = cha/50000;
+		printf("\t오만원 %d개\t", oman);	
+		remain = cha%50000;
+				
+		if(remain%10000 >= 0){	// 1만원권 
+			int man = remain/10000;
+			printf("\t만원 %d개\t", man);	
+			remain = cha%10000;
+			
+			else if(remain%5000 >= 0){	// 오천원권 
+				int ocheon = remain/5000;
+				printf("\t오천원 %d개\t", ocheon);	
+					remain = cha%5000;
+						
+				else if(remain%1000 >= 0){	// 천원권 
+					int cheon = remain/1000;
+					printf("\t천원 %d개\t\n", cheon);	
+					remain = cha%1000;
+							
+					else if(remain%500 >= 0){	// 오백원 
+						int oback = remain/500;
+						printf("\t오백원  %d개\t", oback);	
+						remain = cha%500;
+								
+						else if(remain%100 >= 0){	// 백원 
+							int back = remain/100;
+							printf("\t백원  %d개\t", back);	
+							remain = cha%100;
+								
+							else if(remain%50 >= 0){	// 오십원 
+								int osib = remain/50;
+								printf("\t오십원  %d개\t", osib);	
+								remain = cha%50;
+									
+								else if(remain%10 >= 0){	// 십원 
+									int sib = remain/10;
+									printf("\t십원  %d개\t", sib);	
+									remain = cha%10;
+									
+									else if(remain%1 >= 0){	// 일원권 
+										int il = remain/1;
+										printf("\t일원  %d개\t", il);	
+										remain = cha%1;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+	
+	
+	 
