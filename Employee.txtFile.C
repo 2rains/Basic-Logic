@@ -1,0 +1,26 @@
+Marster.txt (현재직원)
+121 Donald 23 200000
+126 Mitchell 25 200000
+183 john 26 300000
+197 joyce 35 250000
+202 Alicia 34 200000
+215 James 23 300000
+216 Flanklin 26 150000
+219 Smith 38 200000
+237 Ramesh 33 300000
+239 Anders 30 320000
+248 Jeniffer 29 170000
+287 Tommy 27 170000
+309 Steven 31 180000
+315 Danny 30 200000
+341 Stephen 27 300000
+  
+Hire.txt (신입사원)
+106 Mogan 24 250000
+199 Hnery 36 300000
+481 Pobert 27 100000
+
+Retire.txt (퇴직자 사번)
+121
+216
+341
