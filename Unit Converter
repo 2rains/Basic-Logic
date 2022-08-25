@@ -1,0 +1,70 @@
+<InputManager>
+import java.util.Scanner;
+
+public class InputManager {
+	Scanner scan = new Scanner(System.in);
+
+
+	double getDouble() {
+		double x;
+		System.out.print("실수를 입력하시오 : ");
+		x = scan.nextDouble();
+		return x;
+	}
+	
+	String getString() {
+		String s;
+		System.out.print("cm을 inch로 바꾸려면 inch을 입력 or inch를 cm으로 바꾸려면 cm를 입력하시오 : ");
+		s = scan.nextLine();
+		return s;
+	}
+}
+-------------------------------------------------------------------------
+<Converter>
+public class Converter {
+	double inch;
+	double cm;
+	double result;
+	String unit;
+
+	Converter(double in, String str){
+		//System.out.println("cm을 inch로 바꾸려면 cm을 입력 or inch를 cm으로 바꾸려면 inch를 입력하시오 : ");
+		if(str.equals("cm")) {
+			unit = "cm";
+			cm = in;
+		}
+		else if(str.equals("inch")) {
+			unit = "inch";
+			inch = in;
+		}
+	}
+	
+	void converterToCmOrInch(String unit) {
+		if(unit.equals("cm"))
+		result = cm/2.54;
+		
+		else if(unit.equals("inch"))
+		result = inch * 2.54;
+	}
+}
+-------------------------------------------------------------------------
+<Opertor>
+public class Opertor {
+
+	public static void main(String[] args) {
+		
+		Converter con;
+		double num;
+		String str;
+		InputManager in = new InputManager();
+		str = in.getString();
+		num = in.getDouble();
+		
+		System.out.println(num);
+		
+		con = new Converter(num, str);
+		con.converterToCmOrInch(str);
+		System.out.println(str+"을 변환한 값은" + con.result);
+	}
+}
+
